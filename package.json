@@ -1,0 +1,28 @@
+{
+  "name": "resumind-ai",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n web,api -c cyan,magenta \"npm run dev -w @resumind/web\" \"npm run dev -w @resumind/api\"",
+    "build": "npm run build -w @resumind/shared && npm run build -w @resumind/ui && npm run build -w @resumind/api && npm run build -w @resumind/web",
+    "lint": "npm run lint -ws --if-present",
+    "typecheck": "npm run build -w @resumind/shared && npm run build -w @resumind/ui && npm run typecheck -w @resumind/api && npm run typecheck -w @resumind/web",
+    "test": "npm run test -ws --if-present",
+    "test:e2e": "npm run test:e2e -w @resumind/web",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "concurrently": "^9.2.1",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
+  }
+}

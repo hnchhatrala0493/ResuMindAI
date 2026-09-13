@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { authenticate } from '../../middleware/auth.js';
+import * as c from '../../controllers/template.controller.js';
+export const templateRouter = Router();
+templateRouter.get('/', c.list);
+templateRouter.get('/:templateId', c.get);
+templateRouter.get('/:templateId/access', authenticate, c.access);
+export const resumeTemplateRouter = Router();
+resumeTemplateRouter.patch('/:resumeId/template', authenticate, c.apply);
+resumeTemplateRouter.post('/:resumeId/template-preview', authenticate, c.preview);
